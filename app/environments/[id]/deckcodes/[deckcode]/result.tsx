@@ -98,9 +98,16 @@ export function Result ({ id, deckcode }: DeckProps) {
         animate={{ opacity: 1 }}
         className="text-center text-muted-foreground"
       >
-        <footer className="pt-9 pb-5 text-center text-muted-foreground">
-          <p>© {new Date().getFullYear()} provided by <a className={"underline"} href={"https://vsrecorder.mobi"}>バトレコ</a></p>
-        </footer>
+        <div className="pt-9">
+          <a href={"/"}>
+            <p className="underline text-lg text-muted-foreground mx-auto">
+              デッキタイプ診断をしてみる
+            </p>
+          </a>
+          <footer className="pt-9 pb-5 text-center text-muted-foreground">
+            <p>© {new Date().getFullYear()} provided by <a className={"underline"} href={"https://vsrecorder.mobi"}>バトレコ</a></p>
+          </footer>
+        </div>
       </motion.div>
 
     </main>
