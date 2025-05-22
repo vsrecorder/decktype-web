@@ -1,0 +1,6 @@
+services:
+  decktype-web:
+    image: vsrecorder/decktype-web:latest
+    restart: always
+    ports:
+      - 3010:3010
