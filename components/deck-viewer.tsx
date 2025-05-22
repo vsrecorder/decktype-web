@@ -8,11 +8,20 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 interface DeckViewerProps {
-  decktype: DeckType;
+  decktype: DeckType[];
   deckcode: string;
 }
 
 export function DeckViewer({ decktype, deckcode }: DeckViewerProps) {
+  let cards: Card[] = [];
+
+  if (decktype.length >= 2) {
+    cards.push(decktype[0].main_cards[0]);
+    cards.push(decktype[1].main_cards[0]);
+  } else {
+    cards = decktype[0].main_cards;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -28,13 +37,15 @@ export function DeckViewer({ decktype, deckcode }: DeckViewerProps) {
         </div>
 
         <div className="pb-1">
-          <h2 className="text-3xl font-bold tracking-tight">『 {decktype.title} 』</h2>
-          {/*
-          <p className="text-muted-foreground mt-2">デッキ</p>
-          */}
-          {/*
-          <p className="text-muted-foreground mt-2">{deck.main_cards.length} cards</p>
-          */}
+          {decktype.length >= 2 ? (
+            <>
+            <h2 className="text-xl md:text-3xl lg:text-3xl font-bold tracking-tight">『 {decktype[0].title} / {decktype[1].title} 』</h2>
+            </>
+          ):(
+            <>
+            <h2 className="text-3xl font-bold tracking-tight">『 {decktype[0].title} 』</h2>
+            </>
+          )}
         </div>
 
         <div className="pb-0">
@@ -58,7 +69,7 @@ export function DeckViewer({ decktype, deckcode }: DeckViewerProps) {
       </div>
       */}
 
-      <DeckCards cards={decktype.main_cards} />
+      <DeckCards cards={cards} />
 
     </motion.div>
   );

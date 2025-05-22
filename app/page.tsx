@@ -18,7 +18,7 @@ import { RiTwitterXLine } from "react-icons/ri";
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [decktype, setDeckType] = useState<DeckType | null>(null);
+  const [decktype, setDeckType] = useState<DeckType[] | null>(null);
   const [currentDeckCode, setCurrentDeckCode] = useState<string>("");
   const [href, setHref] = useState<string>("");
 
@@ -48,11 +48,16 @@ export default function Home() {
       try {
         const data = await fetchDeckByCode(deckcode);
         if (data && data.length > 0) {
-          setDeckType(data[0]);
+          setDeckType(data);
 
           let encoded = encodeURIComponent('デッキタイプの診断結果は\n\n');
-          encoded = encoded + encodeURIComponent('『 ' + data[0].title + ' 』' + '\n\n' + 'でした！' + '\n\n');
-          encoded = encoded + encodeURIComponent('デッキコード：' + deckcode);
+          if (data.length >= 2) {
+            encoded = encoded + encodeURIComponent('『 ' + data[0].title + ' / ' + data[1].title + ' 』' + '\n\n' + 'でした！' + '\n\n');
+            encoded = encoded + encodeURIComponent('デッキコード：' + deckcode);
+          } else {
+            encoded = encoded + encodeURIComponent('『 ' + data[0].title + ' 』' + '\n\n' + 'でした！' + '\n\n');
+            encoded = encoded + encodeURIComponent('デッキコード：' + deckcode);
+          }
 
           const url = `https://decktype.vsrecorder.mobi/environments/sv10/deckcodes/${deckcode}`;
           const hashtag = encodeURIComponent("ポケカデッキタイプ診断")

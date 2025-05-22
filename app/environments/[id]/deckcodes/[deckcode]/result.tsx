@@ -15,7 +15,7 @@ interface DeckProps {
 export function Result ({ id, deckcode }: DeckProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [decktype, setDeckType] = useState<DeckType | null>(null);
+  const [decktype, setDeckType] = useState<DeckType[] | null>(null);
   const [currentDeckCode, setCurrentDeckCode] = useState<string>("");
 
   const handleSearch = async (deckcode: string) => {
@@ -26,7 +26,7 @@ export function Result ({ id, deckcode }: DeckProps) {
     try {
       const data = await fetchDeckByCode(deckcode);
       if (data && data.length > 0) {
-        setDeckType(data[0]);
+        setDeckType(data);
       } else {
         setError("デッキタイプが見つかりませんでした");
         setDeckType(null);
