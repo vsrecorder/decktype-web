@@ -8,11 +8,11 @@ import { DeckSkeleton } from "@/components/deck-skeleton";
 import { motion } from "framer-motion";
 
 interface DeckProps {
-  id: string;
+  environmentTitle: string;
   deckcode: string;
 }
 
-export function Result ({ id, deckcode }: DeckProps) {
+export function Result ({ environmentTitle, deckcode }: DeckProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [decktype, setDeckType] = useState<DeckType[] | null>(null);
@@ -56,7 +56,7 @@ export function Result ({ id, deckcode }: DeckProps) {
           </h1>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            『ロケット団の栄光』環境
+            『{environmentTitle}』環境
           </p>
         </div>
 
