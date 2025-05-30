@@ -40,9 +40,7 @@ export default async function Home() {
       <div className="container mx-auto px-4 pt-8 max-w-6xl">
         <div className="pb-5 text-center">
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
-              <a href={"/"} >
-                ポケカ デッキタイプ診断
-              </a>
+              <a href={"/"} >ポケカ デッキタイプ診断</a>
           </h1>
         </div>
 

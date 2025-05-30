@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import { useState, useEffect } from "react";
 import { fetchDeckByCode } from "@/lib/api";
 import { DeckType } from "@/types/deck";
@@ -8,23 +9,25 @@ import { DeckSkeleton } from "@/components/deck-skeleton";
 import { motion } from "framer-motion";
 
 interface DeckProps {
+  environmentId: string;
   environmentTitle: string;
   deckcode: string;
 }
 
-export function Result ({ environmentTitle, deckcode }: DeckProps) {
+export function Result ({ environmentId, environmentTitle, deckcode }: DeckProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [decktype, setDeckType] = useState<DeckType[] | null>(null);
   const [currentDeckCode, setCurrentDeckCode] = useState<string>("");
 
-  const handleSearch = async (deckcode: string) => {
+
+  const handleSearch = useCallback(async (deckcode: string) => {
     setIsLoading(true);
     setError(null);
     setCurrentDeckCode(deckcode);
-    
+
     try {
-      const data = await fetchDeckByCode(deckcode);
+      const data = await fetchDeckByCode(environmentId, deckcode);
       if (data && data.length > 0) {
         setDeckType(data);
       } else {
@@ -37,22 +40,20 @@ export function Result ({ environmentTitle, deckcode }: DeckProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [environmentId]);
 
   useEffect(() => {
     if (deckcode) {
       handleSearch(deckcode);
     }
-  }, [deckcode]);
+  }, [deckcode, handleSearch]);
 
   return (
     <main className="max-h-screen bg-gradient-to-b from-background">
       <div className="container mx-auto px-4 pt-8 max-w-6xl">
         <div className="pb-3 text-center">
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
-            <a href={"/"} >
-                ポケカ デッキタイプ診断
-            </a>
+            <a href={"/"} >ポケカ デッキタイプ診断</a>
           </h1>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

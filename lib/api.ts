@@ -2,9 +2,10 @@ import { DeckType } from "@/types/deck";
 
 const API_BASE_URL = "https://vsrecorder.mobi/api/v1/decktypes";
 
-export async function fetchDeckByCode(deckcode: string): Promise<DeckType[]> {
+export async function fetchDeckByCode(environmentId: string, deckcode: string): Promise<DeckType[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/${deckcode}`);
+    const url = `${API_BASE_URL}/${deckcode}/${environmentId}`
+    const response = await fetch(url);
     
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
