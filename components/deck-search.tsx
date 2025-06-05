@@ -39,7 +39,7 @@ export function DeckSearch({ onSearch, isLoading }: DeckSearchProps) {
           disabled={!deckcode.trim() || isLoading}
           className="h-12 px-9 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-300"
         >
-          {isLoading ? "診断中" : "診断"}
+          {isLoading ? "診断" : "診断"}
         </Button>
       </div>
     </form>

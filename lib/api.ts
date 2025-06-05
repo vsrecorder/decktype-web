@@ -5,7 +5,9 @@ const API_BASE_URL = "https://vsrecorder.mobi/api/v1/decktypes";
 export async function fetchDeckByCode(environmentId: string, deckcode: string): Promise<DeckType[]> {
   try {
     const url = `${API_BASE_URL}/${deckcode}/${environmentId}`
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      cache: "no-store",
+    });
     
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);

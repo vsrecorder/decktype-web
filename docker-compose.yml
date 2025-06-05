@@ -4,3 +4,5 @@ services:
     restart: always
     ports:
       - 3010:3010
+    environment:
+      - TZ=Asia/Tokyo

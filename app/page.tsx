@@ -16,7 +16,10 @@ export default async function Home() {
   const day =  ("0"+date.getDate()).slice(-2);
 
   try {
-    const response = await fetch(`${BASE_URL}`+ "?date="+ year + "-" + month + "-" + day);
+    const response = await fetch(`${BASE_URL}`+ "?date="+ year + "-" + month + "-" + day, {
+      cache: "no-store",
+    });
+
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
     }
