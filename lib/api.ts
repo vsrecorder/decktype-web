@@ -8,11 +8,13 @@ export async function fetchDeckByCode(environmentId: string, deckcode: string): 
     const response = await fetch(url, {
       cache: "no-store",
     });
-    
-    if (!response.ok) {
+
+    if (response.status === 204) {
+      return [];
+    } else if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
     }
-    
+
     const data = await response.json();
     return data;
   } catch (error) {
