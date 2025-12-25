@@ -56,8 +56,11 @@ export function Result ({ environmentId, environmentTitle, deckcode }: DeckProps
             <a href={"/"} >ポケカ デッキタイプ診断</a>
           </h1>
 
+          <p className="text-md text-muted-foreground max-w-2xl mx-auto">
+            環境
+          </p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            『{environmentTitle}』環境
+            『{environmentTitle}』
           </p>
         </div>
 

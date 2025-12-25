@@ -97,8 +97,11 @@ export default function TopPage({ environmentId, environmentTitle }: TopPageProp
             animate={{ opacity: 1 }}
             className="text-center text-muted-foreground"
           >
+            <p className="text-md text-muted-foreground max-w-2xl mx-auto">
+              環境
+            </p>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              『{environmentTitle}』環境
+              『{environmentTitle}』
             </p>
           </motion.div>
         </div>
